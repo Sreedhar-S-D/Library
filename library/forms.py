@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 #d
 class ReaderUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model=User
         fields=['first_name','last_name','username','email','password']
@@ -39,14 +40,21 @@ class Book_AuthorForm(forms.ModelForm):
 class PublisherForm(forms.ModelForm):
     class Meta:
         model=models.Publisher
-        fields='__all__'
+        fields=['pname','pid','year']
 
+class PublishedByForm(forms.ModelForm):
+    class Meta:
+        model=models.PublishedBy
+        fields=['isbn']
+
+        
 class StaffForm(forms.ModelForm):
     class Meta:
         model=models.Staff
         fields=['head_shot']
 
 class StaffUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model=User
         fields=['first_name','last_name','username','email','password']
@@ -56,10 +64,7 @@ class KeepsTrackForm(forms.ModelForm):
         model=models.KeepsTrack
         fields='__all__'
         
-class PublishedByForm(forms.ModelForm):
-    class Meta:
-        model=models.PublishedBy
-        fields='__all__'
+
 
 class MaintainsForm(forms.ModelForm):
     class Meta:
@@ -73,7 +78,7 @@ class IssuedToForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
    username = forms.CharField(max_length = 100,)
-   password = forms.CharField()
+   password = forms.CharField(widget=forms.PasswordInput())
 
 class ReviewForm(forms.ModelForm):
     class Meta:

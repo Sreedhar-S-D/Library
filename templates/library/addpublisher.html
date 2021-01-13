@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Book Review</title>
+    <title>Add Publisher</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -12,9 +12,9 @@
 
 
     <style type="text/css">
-    	body {
+    	body{
     		color: #aa082e;
-    		background: #c5acb0;
+    		background-color: : #b6bde7 !important;
     		font-family: 'Roboto', sans-serif;
     	}
         .form-control {
@@ -94,18 +94,15 @@
 
   </head>
   <body style="background-color:#b6bde7;">
-    {% include "library/navbarstudent.html" %}
+    {% include "library/navbarstaff.html" %}
     <br>
     <br>
-<center><h3 style=" margin-bottom: 0px;"class = 'alert alert-success'>REVIEW A BOOK !</h3></center>
+<center><h3 style=" margin-bottom: 0px;"class = 'alert alert-success'>ADD Publisher!</h3></center>
     <div class="signup-form">
         <form  method="post" class="form-horizontal">
-
-    			<center><h2>REVIEW A BOOK</h2></center>
-
-{% csrf_token %}
-
-            {% for field in form %}
+    			<center><h2>ADD Publisher</h2></center>
+            {% csrf_token %}
+            {% for field in form1 %}
             <div class="form-group">
               <label class="control-label col-xs-4">{{ field.label_tag }}</label>
               <div class="col-xs-8">
@@ -114,19 +111,20 @@
             </div>
             {% endfor %}
 
+			      <div class="form-group">
+              <label class="control-label col-xs-4">BOOK ISBN</label>
+              <div class="col-xs-8">
+              {{ form2.isbn}}
+               </div>
+            </div>
 
-    		<div class="form-group">
+    		  <div class="form-group">
     			<div class="col-xs-8 col-xs-offset-4">
-            <button type="submit" class="btn btn-primary btn-lg">ADD REVIEW</button>
+            <button type="submit" class="btn btn-primary btn-lg">ADD</button>
     			</div>
     		</div>
         </form>
-    	<div class="text-center">View Reviews Here<a href="view_review">Click here</a></div>
     </div>
-
-
-
-
     {% include "library/footer.html" %}
   </body>
 </html>

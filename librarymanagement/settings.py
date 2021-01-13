@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'library',
     'background_task'
 ]
-
+BACKGROUND_TASK_RUN_ASYNC = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -127,11 +127,15 @@ STATIC_DIR,
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'quasisreed@yahoo.com'
-EMAIL_HOST_PASSWORD = ''
+# 587 for gmail 465 for yahoo
+EMAIL_HOST_USER = 'your email'
+EMAIL_HOST_PASSWORD = 'your password'
+# 'llggplnvtpolorhl'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 LOGIN_REDIRECT_URL='/afterlogin'
 

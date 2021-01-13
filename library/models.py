@@ -8,7 +8,7 @@ class Reader(sqlmodel.Model):
     isfaculty=sqlmodel.BooleanField()
     dept=sqlmodel.CharField(max_length=50)
     head_shot=sqlmodel.ImageField(upload_to='profil_images',blank=True)
-    
+    total_books_due=sqlmodel.IntegerField(default=0)
     def __str__(self):
         return str(self.user.username)
     @property
@@ -17,6 +17,9 @@ class Reader(sqlmodel.Model):
     @property
     def getuserid(self):
         return self.user.id
+    @property
+    def getcopies(self):
+        return self.total_books_due
 
 class Reader_Pno(sqlmodel.Model):
     userid=sqlmodel.ForeignKey(Reader,on_delete=sqlmodel.CASCADE)
@@ -57,12 +60,20 @@ class Book_Author(sqlmodel.Model):
 
 class Publisher(sqlmodel.Model):
     pname=sqlmodel.CharField(max_length=30)
-    pid=sqlmodel.CharField(max_length=30,primary_key=True)
+    pid=sqlmodel.CharField(max_length=30,primary_key=True,unique=True)
     year=sqlmodel.IntegerField()
 
     def __str__(self):
         return str(self.pname)+' '+str(self.pid)
 
+class PublishedBy(sqlmodel.Model):
+    isbn=sqlmodel.ForeignKey(Book,on_delete=sqlmodel.CASCADE)
+    pid=sqlmodel.ForeignKey(Publisher,on_delete=sqlmodel.CASCADE)
+
+    def __str__(self):
+        return str(self.isbn.isbn)+' '+str(self.pid.pid)
+
+        
 class Staff(sqlmodel.Model):
     user=sqlmodel.OneToOneField(User,on_delete=sqlmodel.CASCADE)
     head_shot=sqlmodel.ImageField(upload_to='profil_images',blank=True)
@@ -75,14 +86,6 @@ class KeepsTrack(sqlmodel.Model):
 
     def __str__(self):
         return str(self.sid.id)+str(self.userid.id)
-
-class PublishedBy(sqlmodel.Model):
-    isbn=sqlmodel.ForeignKey(Book,on_delete=sqlmodel.CASCADE)
-    pid=sqlmodel.ForeignKey(Publisher,on_delete=sqlmodel.CASCADE)
-
-    def __str__(self):
-        return str(self.isbn.isbn)+' '+str(self.pid.pid)
-
 
 class Maintains(sqlmodel.Model):
     isbn=sqlmodel.ForeignKey(Book,on_delete=sqlmodel.CASCADE)
@@ -105,4 +108,5 @@ class IssuedTo(sqlmodel.Model):
 class Review(mongomodel.Model):
     isbn=mongomodel.CharField(max_length=100)
     review = mongomodel.FloatField(default=0)
+    people_reviewed_by = mongomodel.JSONField(default=[])
     objects = mongomodel.DjongoManager()

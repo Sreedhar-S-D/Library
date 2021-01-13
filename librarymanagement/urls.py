@@ -42,7 +42,8 @@ urlpatterns = [
     path('viewissuedbook', lv.viewissuedbook_view),
     path('viewstudent', lv.viewstudent_view),
     path('viewissuedbookbystudent',lv.viewissuedbookbystudent),
-
+    path('addpublisher', lv.addpublisher_view),
+    path('viewpublisher',lv.viewpublisher_view),
     # the mongodb part
     path('add_book_review', lv.add_book_review),
     path('view_book_review', lv.view_book_review)

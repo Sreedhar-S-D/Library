@@ -55,41 +55,41 @@ border-radius: 5px;
 </style>
   </head>
   <body>
-    {% include "library/navbarstudent.html" %}
+    {% include "library/navbarstaff.html" %}
     <br>
     <br>
-    <h3 class="p-3 mb-2 bg-primary text-white" style = 'font-size: 50px;text-align:center;'>Available Book in Library !</h3>
-{% if li2%}
+    <h3 class="p-3 mb-2 bg-primary text-white" style = 'font-size: 50px;text-align:center;'>Publishers of Books in Library !</h3>
+{% if li%}
 <table class="redTable">
   <thead>
     <tr>
-      <th>ISBN</th>
-      <th>Book Name</th>
-      <th>Book Author</th>
-      <th>Review</th>
+      <th>Publisher ID</th>
+      <th>Publisher Name</th>
+      <th>Year</th>
+      <th>Book ISBN</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
-      <td colspan="7" >
+      <td colspan="4" >
       <div class="links"></div>
       </td>
     </tr>
   </tfoot>
 
   <tbody>
-  {% for a in li2 %}
+  {% for a in li %}
     <tr>
       <td>{{a.0}}</td>
       <td>{{a.1}}</td>
       <td>{{a.2}}</td>
       <td>{{a.3}}</td>
-      {% endfor %}
     </tr>
+  {% endfor %}
   </tbody>
 </table>
 {%else%}
-<h1>Have book Reviews from student</h1>
+<h1>Have 0 Publishers</h1>
 {%endif%}
 
 
